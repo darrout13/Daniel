@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Feliz Cumpleaños, Preciosa 🌼</title>
-    
+    <title>Feliz Dia, Preciosa 🌼</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Caveat:wght@600;700&family=Special+Elite&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
     <style>
         :root {
+            /* Colores Base */
             --bg-yellow: #FFFBE6;
             --pastel-yellow: #FDF181;
             --pastel-pink: #FDECF2;
@@ -21,744 +20,557 @@
             --deep-lilac: #D9C4EC;
             --text-dark: #7A5B62;
             --white: #FFFFFF;
+            
+            /* Tema Azul */
+            --blue-light: #EAF2FB;
+            --blue-mid: #7FA8D9;
+            --blue-deep: #1A4A7A;
+
+            /* Tema Sylvia Plath */
+            --sepia-bg: #F3E9D2;
+            --sepia-paper: #EDE0C4;
+            --sepia-ink: #3a2b20;
+            --sepia-line: #9C7A4A;
+
+            /* Fuentes */
             --font-ui: 'Baloo 2', sans-serif;
             --font-hand: 'Caveat', cursive;
+            --font-poem: 'Playfair Display', serif;
+            --font-typewriter: 'Special Elite', 'Courier New', monospace;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
         body {
             background-color: var(--bg-yellow);
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(253, 241, 129, 0.4) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(244, 167, 185, 0.3) 0%, transparent 40%);
-            font-family: var(--font-ui);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-x: hidden;
-            position: relative;
-            color: var(--text-dark);
-            padding: 1rem;
+            background-image: radial-gradient(circle at 10% 20%, rgba(253, 241, 129, 0.4) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(244, 167, 185, 0.3) 0%, transparent 40%);
+            font-family: var(--font-ui); min-height: 100vh; display: flex; justify-content: center; align-items: center; overflow-x: hidden; position: relative; color: var(--text-dark); padding: 1rem;
         }
 
-        .bg-flowers {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
+        /* --- Fondo animado --- */
+        .bg-flowers { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; }
+        .floating-flower { position: absolute; opacity: 0.6; animation: float-flower 8s infinite ease-in-out; }
+        @keyframes float-flower { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-30px) rotate(15deg); } }
 
-        .floating-flower {
-            position: absolute;
-            opacity: 0.6;
-            animation: float-flower 8s infinite ease-in-out;
-        }
-
-        @keyframes float-flower {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(15deg); }
-        }
-
+        /* --- Contenedor Principal --- */
         .app-container {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            max-width: 600px;
-            background-color: var(--white);
-            border: 5px solid var(--deep-pink);
-            border-radius: 40px;
+            position: relative; z-index: 10; width: 100%; max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+            border: 5px solid var(--deep-pink); border-radius: 40px;
             box-shadow: 0 15px 35px rgba(244, 167, 185, 0.3), inset 0 0 20px rgba(253, 236, 242, 0.8);
-            padding: 2.5rem 2rem;
-            text-align: center;
-            min-height: 550px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            padding: 2.5rem 2rem; text-align: center; min-height: 550px;
+            display: flex; flex-direction: column; justify-content: center;
         }
 
-        .screen {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.6s ease;
-            width: 100%;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
+        .screen { display: none; opacity: 0; transition: opacity 0.6s ease; width: 100%; flex-direction: column; align-items: center; justify-content: center; }
+        .screen.active { display: flex; opacity: 1; animation: pop-in 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes pop-in { 0% { transform: scale(0.9) translateY(20px); opacity: 0; } 100% { transform: scale(1) translateY(0); opacity: 1; } }
 
-        .screen.active {
-            display: flex;
-            opacity: 1;
-            animation: pop-in 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+        h1, h2 { font-family: var(--font-hand); color: var(--text-pink); font-size: clamp(2.8rem, 8vw, 3.8rem); line-height: 1.1; margin-bottom: 0.5rem; text-shadow: 2px 2px 0px rgba(244, 167, 185, 0.2); }
+        .subtitle { font-size: clamp(1.1rem, 4vw, 1.3rem); font-weight: 600; color: var(--text-dark); margin-bottom: 1.5rem; opacity: 0.8; }
 
-        @keyframes pop-in {
-            0% { transform: scale(0.9) translateY(20px); opacity: 0; }
-            100% { transform: scale(1) translateY(0); opacity: 1; }
-        }
+        /* --- Fluttershy --- */
+        .pony-wrapper { width: 220px; height: 220px; margin: 0 auto 1rem; animation: levitate 4s infinite ease-in-out; position: relative; }
+        @keyframes levitate { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        .wing { transform-origin: 30% 60%; animation: flap 0.3s infinite alternate ease-in-out; }
+        @keyframes flap { 0% { transform: rotate(0deg); } 100% { transform: rotate(-35deg); } }
 
-        h1, h2 {
-            font-family: var(--font-hand);
-            color: var(--text-pink);
-            font-size: clamp(2.8rem, 8vw, 3.8rem);
-            line-height: 1.1;
-            margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 0px rgba(244, 167, 185, 0.2);
-        }
+        /* --- Botones --- */
+        .btn-group { display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 1rem; width: 100%; }
+        button { font-family: var(--font-ui); font-weight: 700; font-size: 1.2rem; padding: 0.8rem 2rem; border-radius: 50px; cursor: pointer; transition: all 0.2s ease; outline: none; border: none; z-index: 10; position: relative;}
+        .btn-yes { background-color: var(--text-pink); color: var(--white); box-shadow: 0 6px 0px #D8899D, 0 10px 15px rgba(242, 140, 159, 0.4); }
+        .btn-yes:hover { background-color: var(--hover-pink); transform: translateY(-2px); }
+        .btn-yes:active { transform: translateY(4px); box-shadow: 0 2px 0px #D8899D; }
+        .btn-no { background-color: var(--white); color: var(--text-pink); border: 3px solid var(--deep-pink); box-shadow: 0 6px 0px var(--pastel-pink); transition: transform 0.3s ease, opacity 0.3s ease; }
+        .btn-no:hover { transform: translateY(-2px); }
+        .no-msg-text { width: 100%; margin-top: 15px; font-size: 1.1rem; color: var(--deep-pink); font-weight: 700; min-height: 24px; }
 
-        .subtitle {
-            font-size: clamp(1.1rem, 4vw, 1.3rem);
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 1.5rem;
-            opacity: 0.8;
-        }
+        /* --- Cartas Mariposa --- */
+        .cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin-top: 1rem; width: 100%; max-width: 350px; margin-left: auto; margin-right: auto; }
+        .surprise-card { border-radius: 25px; aspect-ratio: 1; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; }
+        .surprise-card.theme-azul { background: linear-gradient(135deg, var(--white), var(--blue-light)); border: 3px solid var(--blue-mid); box-shadow: 0 8px 0px var(--blue-deep); }
+        .surprise-card.theme-mascotas { background: linear-gradient(135deg, var(--white), var(--pastel-yellow)); border: 3px solid var(--pastel-yellow); box-shadow: 0 8px 0px #E9D26B; }
+        .surprise-card.theme-plath { background: linear-gradient(135deg, var(--white), var(--sepia-paper)); border: 3px solid var(--sepia-line); box-shadow: 0 8px 0px var(--sepia-ink); }
+        .surprise-card.theme-canciones { background: linear-gradient(135deg, var(--white), #d7f5e3); border: 3px solid #1DB954; box-shadow: 0 8px 0px #14883f; }
+        .surprise-card svg { width: 60%; height: 60%; transition: transform 0.3s ease; }
+        .surprise-card:hover:not(.opened) { transform: translateY(-8px) scale(1.05); }
+        .surprise-card:hover:not(.opened) svg { transform: rotate(10deg) scale(1.1); }
+        .surprise-card.opened { background: #E8E8E8; border-color: #B0B0B0; box-shadow: 0 4px 0px #B0B0B0; cursor: default; transform: scale(0.95); }
+        .surprise-card.opened svg { filter: grayscale(1); opacity: 0.4; }
 
-        .pony-wrapper {
-            width: 220px;
-            height: 220px;
-            margin: 0 auto 1rem;
-            animation: levitate 4s infinite ease-in-out;
-            position: relative;
-        }
-
-        @keyframes levitate {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        .wing {
-            transform-origin: 30% 60%;
-            animation: flap 0.3s infinite alternate ease-in-out;
-        }
-
-        @keyframes flap {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(-35deg); }
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-            position: relative;
-            min-height: 60px;
-            width: 100%;
-        }
-
-        button {
-            font-family: var(--font-ui);
-            font-weight: 700;
-            font-size: 1.2rem;
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            outline: none;
-            border: none;
-        }
-
-        .btn-yes {
-            background-color: var(--text-pink);
-            color: var(--white);
-            box-shadow: 0 6px 0px #D8899D, 0 10px 15px rgba(242, 140, 159, 0.4);
-            z-index: 2;
-        }
-
-        .btn-yes:hover {
-            background-color: var(--hover-pink);
-            transform: translateY(-2px);
-        }
-
-        .btn-yes:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0px #D8899D;
-        }
-
-        .btn-no {
-            background-color: var(--white);
-            color: var(--text-pink);
-            border: 3px solid var(--deep-pink);
-            box-shadow: 0 6px 0px var(--pastel-pink);
-            z-index: 3;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-
-        .btn-no:hover {
-            transform: translateY(-2px);
-        }
-
-        .no-msg-text {
-            width: 100%;
-            margin-top: 15px;
-            font-size: 1.1rem;
-            color: var(--deep-pink);
-            font-weight: 700;
-            min-height: 24px;
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.2rem;
-            margin-top: 1rem;
-            width: 100%;
-            max-width: 350px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .surprise-card {
-            background: linear-gradient(135deg, var(--white), var(--pastel-yellow));
-            border: 3px solid var(--pastel-yellow);
-            border-radius: 25px;
-            aspect-ratio: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 8px 0px #E9D26B, 0 15px 20px rgba(233, 210, 107, 0.3);
-            position: relative;
-        }
-
-        .surprise-card svg {
-            width: 60%;
-            height: 60%;
-            transition: transform 0.3s ease;
-        }
-
-        .surprise-card:hover:not(.opened) {
-            transform: translateY(-8px) scale(1.05);
-        }
-
-        .surprise-card:hover:not(.opened) svg {
-            transform: rotate(10deg) scale(1.1);
-        }
-
-        .surprise-card:active:not(.opened) {
-            transform: translateY(2px);
-            box-shadow: 0 2px 0px #E9D26B;
-        }
-
-        .surprise-card.opened {
-            background: var(--pastel-pink);
-            border-color: var(--deep-pink);
-            box-shadow: 0 4px 0px var(--deep-pink);
-            cursor: default;
-            opacity: 0.8;
-            transform: scale(0.95);
-        }
+        /* --- Ventanas Modales GIGANTES --- */
+        .modal-overlay { position: fixed; inset: 0; background-color: rgba(255, 241, 245, 0.85); backdrop-filter: blur(8px); z-index: 100; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; padding: 1rem; }
+        .modal-overlay.show { opacity: 1; pointer-events: all; }
+        .modal-content { background: var(--white); border: 5px solid var(--deep-pink); border-radius: 40px; padding: 2.5rem 2rem; width: 95vw; max-width: 900px; height: 90vh; max-height: 90vh; overflow-y: auto; overflow-x: hidden; text-align: center; transform: scale(0.8) translateY(30px); transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 25px 50px rgba(242, 140, 159, 0.4); display: flex; flex-direction: column; align-items: center; position: relative; }
+        .modal-overlay.show .modal-content { transform: scale(1) translateY(0); }
+        .modal-content::-webkit-scrollbar { width: 10px; }
+        .modal-content::-webkit-scrollbar-thumb { background-color: var(--deep-pink); border-radius: 10px; }
         
-        .surprise-card.opened svg {
-            filter: grayscale(0.5);
-            opacity: 0.5;
+        .modal-heading { font-family: var(--font-hand); font-size: 3.5rem; color: var(--text-pink); margin-bottom: 1rem; line-height: 1.1; z-index: 2; position: relative; }
+        .modal-body { font-size: 1.3rem; line-height: 1.6; color: var(--text-dark); margin-bottom: 1.5rem; text-align: justify; padding: 0 1rem; z-index: 2; position: relative; }
+
+        /* ================= TEMA AZUL (OCÉANO Y AGUA) ================= */
+        .theme-blue-content {
+            border-color: #6495ED;
+            background: linear-gradient(180deg, #E0F7FA 0%, #81D4FA 50%, #29B6F6 100%);
+        }
+        /* Burbujas animadas */
+        .bubble-container { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1; border-radius: 35px; }
+        .bubble { position: absolute; bottom: -50px; background: rgba(255, 255, 255, 0.5); border-radius: 50%; box-shadow: inset 0 0 10px rgba(255,255,255,0.8); animation: floatUp infinite ease-in; }
+        .b1 { width: 40px; height: 40px; left: 10%; animation-duration: 8s; animation-delay: 0s; }
+        .b2 { width: 25px; height: 25px; left: 30%; animation-duration: 5s; animation-delay: 2s; }
+        .b3 { width: 50px; height: 50px; left: 70%; animation-duration: 9s; animation-delay: 1s; }
+        .b4 { width: 20px; height: 20px; left: 85%; animation-duration: 6s; animation-delay: 3s; }
+        .b5 { width: 35px; height: 35px; left: 50%; animation-duration: 7s; animation-delay: 0.5s; }
+        @keyframes floatUp { 0% { transform: translateY(0) translateX(0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-1000px) translateX(30px); opacity: 0; } }
+
+        /* Textos como cristal sobre el agua */
+        .theme-blue-content .modal-heading { color: var(--blue-deep); text-shadow: 2px 2px 0px rgba(255,255,255,0.8); }
+        .theme-blue-content .modal-body { background: rgba(255, 255, 255, 0.6); padding: 1.5rem; border-radius: 20px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.8); box-shadow: 0 10px 20px rgba(0,100,200,0.1); }
+        .theme-blue-content .modal-poem { 
+            color: var(--blue-deep); background: rgba(255,255,255,0.7); border: 2px solid #81D4FA; 
+            box-shadow: 0 10px 20px rgba(41, 182, 246, 0.3); border-radius: 50px 10px 50px 10px;
+        }
+        .theme-blue-content .btn-close-theme { background-color: var(--blue-deep); box-shadow: 0 6px 0px #0F3254; color: white; }
+
+        /* ================= TEMA SYLVIA PLATH (LIBROS VINTAGE) ================= */
+        .theme-plath-content { 
+            background: 
+                radial-gradient(circle, rgba(237,224,196,1) 0%, rgba(200,180,140,1) 100%);
+            border: 8px solid var(--sepia-ink); font-family: var(--font-typewriter); 
+            box-shadow: inset 0 0 80px rgba(74, 55, 40, 0.5);
+        }
+        .theme-plath-content .modal-heading { font-family: var(--font-typewriter); color: var(--sepia-ink); font-size: 2.8rem; margin-bottom: 1.5rem; font-weight: 800; border-bottom: 2px solid var(--sepia-ink); padding-bottom: 10px; width: fit-content; margin-left: auto; margin-right: auto;}
+        .theme-plath-content .modal-body { font-family: var(--font-typewriter); color: var(--sepia-ink); font-weight: bold; }
+        
+        /* Diseño Polaroid para la foto */
+        .plath-polaroid {
+            background: #fcfcfc; padding: 15px 15px 45px 15px; border-radius: 2px;
+            box-shadow: 5px 10px 20px rgba(0,0,0,0.3); transform: rotate(-4deg);
+            margin: 0 auto 2rem; width: fit-content; position: relative;
+        }
+        /* Cinta de enmascarar en la polaroid */
+        .plath-polaroid::before {
+            content: ''; position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(2deg);
+            width: 100px; height: 25px; background: rgba(240, 230, 200, 0.7);
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1); border-left: 2px dashed rgba(0,0,0,0.05); border-right: 2px dashed rgba(0,0,0,0.05);
+        }
+        .plath-polaroid img { width: 220px; height: 220px; object-fit: cover; filter: sepia(0.6) contrast(1.2) brightness(0.9); border: 1px solid #ddd; }
+
+        /* Diseño de Libro para el poema */
+        .plath-poem-book {
+            font-family: var(--font-poem); font-size: 1.4rem; color: var(--sepia-ink); line-height: 1.9;
+            margin: 1.5rem auto; padding: 2.5rem 3rem 2.5rem 2rem;
+            background: #FDFBF7; border: 1px solid #D1C7B7;
+            border-left: 20px solid #8B3A3A; /* Pasta del libro roja vintage */
+            border-radius: 3px 15px 15px 3px; position: relative;
+            box-shadow: 10px 10px 25px rgba(0,0,0,0.15), inset 15px 0 10px -10px rgba(0,0,0,0.1);
+            font-style: italic; text-align: left; max-width: 90%;
+        }
+        /* Separador de libro */
+        .plath-poem-book::after {
+            content: ''; position: absolute; top: -5px; right: 40px; width: 15px; height: 50px; background: #3E6FA8;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2); border-radius: 0 0 3px 3px;
         }
 
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background-color: rgba(255, 251, 230, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease;
-            padding: 1rem;
-        }
+        .theme-plath-content .btn-close-theme { background-color: var(--sepia-ink); font-family: var(--font-typewriter); box-shadow: 0 6px 0px #1A130E; border: 2px solid #E3D5B8;}
+        
+        /* ================= OTROS TEMAS ================= */
+        /* Tema Mascotas */
+        .pet-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-bottom: 1.5rem; width: 100%; max-width: 500px; margin-left: auto; margin-right: auto; z-index: 2; position: relative;}
+        .pet-photo { position: relative; aspect-ratio: 1; border-radius: 30px; overflow: hidden; border: 5px solid var(--white); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .pet-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        .pet-caption { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.9); font-size: 1.5rem; font-weight: 700; color: var(--text-pink); padding: 0.5rem; font-family: var(--font-hand); }
 
-        .modal-overlay.show {
-            opacity: 1;
-            pointer-events: all;
-        }
+        /* Tema Spotify/Canciones */
+        .theme-spotify-content { border-color: #1DB954; background: linear-gradient(180deg, var(--white) 0%, #e6f7eb 100%); }
+        .theme-spotify-content .modal-heading { color: #1DB954; }
+        .theme-spotify-content .btn-close-theme { background-color: #1DB954; box-shadow: 0 6px 0px #14883f; }
+        .spotify-list { display: flex; flex-direction: column; gap: 0.8rem; width: 100%; max-width: 600px; margin: 0 auto 1.5rem; z-index: 2; position: relative;}
+        .track-row { display: flex; align-items: center; gap: 1rem; background: rgba(255, 255, 255, 0.8); border-radius: 20px; padding: 0.8rem 1rem; transition: all 0.3s ease; border: 2px solid transparent; cursor: pointer; }
+        .track-row:hover { background: var(--white); transform: scale(1.02); box-shadow: 0 5px 15px rgba(29, 185, 84, 0.2); }
+        .track-row.playing { border-color: #1DB954; background: var(--white); }
+        .track-number { font-size: 1.2rem; font-weight: 800; color: #1DB954; width: 25px; text-align: center;}
+        .track-info { display: flex; flex-direction: column; align-items: flex-start; flex-grow: 1; text-align: left; }
+        .track-title { font-size: 1.2rem; font-weight: 700; color: var(--text-dark); }
+        .track-artist { font-size: 1rem; color: #1DB954; font-family: var(--font-ui);}
+        .eq-bars { display: none; gap: 3px; align-items: flex-end; height: 20px; margin-left: auto;}
+        .eq-bars span { width: 4px; background: #1DB954; border-radius: 2px; animation: eq-bounce 0.9s infinite ease-in-out; }
+        .eq-bars span:nth-child(1) { animation-delay: 0s; }
+        .eq-bars span:nth-child(2) { animation-delay: 0.2s; }
+        .eq-bars span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes eq-bounce { 0%, 100% { height: 5px; } 50% { height: 20px; } }
+        .track-row.playing .eq-bars { display: flex; }
 
-        .modal-content {
-            background: var(--white);
-            border: 4px dashed var(--deep-pink);
-            border-radius: 35px;
-            padding: 2.5rem 2rem;
-            width: 100%;
-            max-width: 450px;
-            text-align: center;
-            transform: scale(0.8) translateY(30px);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 20px 40px rgba(244, 167, 185, 0.25);
-            position: relative;
-        }
+        .princess-player { width: 100%; max-width: 600px; margin: 1.5rem auto 0; background: var(--white); border: 3px solid #1DB954; border-radius: 30px; padding: 15px 20px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 10px 20px rgba(29, 185, 84, 0.15); z-index: 2; position: relative;}
+        .player-controls { display: flex; align-items: center; gap: 15px; width: 100%; }
+        .btn-play-pause { width: 50px; height: 50px; min-width: 50px; border-radius: 50%; background: #1DB954; color: white; display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; box-shadow: 0 4px 0px #14883f; transition: all 0.2s; }
+        .btn-play-pause:hover { transform: translateY(-2px); background: #1ed760; }
+        .btn-play-pause:active { transform: translateY(2px); box-shadow: 0 0px 0px #14883f; }
+        .btn-play-pause svg { width: 20px; height: 20px; fill: currentColor; }
+        .time-text { font-size: 1rem; font-weight: 700; color: #1DB954; min-width: 45px; }
+        .progress-bar { flex-grow: 1; -webkit-appearance: none; appearance: none; height: 10px; background: #e6f7eb; border-radius: 5px; outline: none; cursor: pointer; position: relative; }
+        .progress-bar::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--white); border: 4px solid #1DB954; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
-        .modal-overlay.show .modal-content {
-            transform: scale(1) translateY(0);
-        }
+        /* Elementos Genericos */
+        .modal-poem { font-family: var(--font-hand); font-size: 2rem; color: var(--text-pink); line-height: 1.4; margin: 1.5rem 0; padding: 1.5rem; background: rgba(255,255,255,0.6); border-radius: 20px; z-index: 2; position: relative;}
 
-        .mini-pony {
-            width: 120px;
-            height: 120px;
-            margin: -60px auto 10px; /* Pops out of top */
-            animation: levitate 3s infinite ease-in-out;
-            background: var(--white);
-            border-radius: 50%;
-            padding: 10px;
-            border: 3px solid var(--deep-pink);
-        }
+        /* --- Animación Flores Finales & Modelo 3D --- */
+        .final-action { display: none; margin-top: 2rem; animation: pop-in 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); border-top: 2px dashed var(--deep-lilac); padding-top: 1.5rem; width: 100%; }
+        .final-action.show { display: block; }
+        
+        .flower-bouquet { display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; font-size: 3rem; }
+        .flower-emoji { animation: flower-dance 2s infinite ease-in-out; text-shadow: 0 10px 15px rgba(253, 241, 129, 0.6); }
+        .flower-emoji.f1 { animation-delay: 0s; }
+        .flower-emoji.f2 { animation-delay: 0.3s; transform: scale(1.2); }
+        .flower-emoji.f3 { animation-delay: 0.6s; }
+        @keyframes flower-dance { 0%, 100% { transform: translateY(0) scale(1) rotate(-5deg); } 50% { transform: translateY(-15px) scale(1.1) rotate(5deg); } }
 
-        .modal-poem {
-            font-family: var(--font-hand);
-            font-size: 1.8rem;
-            color: var(--text-dark);
-            line-height: 1.3;
-            margin-bottom: 1.5rem;
-            white-space: pre-line;
-        }
+        .final-text-viena { font-family: var(--font-hand); font-size: 2.8rem; color: var(--text-pink); line-height: 1.1; margin-bottom: 0.5rem; text-shadow: 0 0 10px var(--pastel-yellow); }
+        .final-author { font-family: var(--font-hand); font-size: 2rem; color: var(--deep-pink); margin-bottom: 1rem; }
+        
+        /* Contenedor del Iframe 3D (Adaptable) */
+        .sketchfab-container { width: 100%; max-width: 500px; margin: 0 auto 1.5rem; border-radius: 20px; overflow: hidden; border: 4px solid var(--pastel-yellow); box-shadow: 0 10px 25px rgba(253, 241, 129, 0.4); background: #f9f9f9; }
+        .sketchfab-container iframe { width: 100%; height: 280px; display: block; border: none; }
 
-        .final-action {
-            display: none;
-            margin-top: 2rem;
-            animation: pop-in 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border-top: 2px dashed var(--deep-lilac);
-            padding-top: 1.5rem;
-            width: 100%;
-        }
+        .btn-pulse { background: linear-gradient(135deg, var(--text-pink), #FF6B8B); color: white; width: 100%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 6px 0px #D8899D, 0 0 0 0 rgba(242, 140, 159, 0.7); } 50% { transform: scale(1.05); box-shadow: 0 6px 0px #D8899D, 0 0 0 15px rgba(242, 140, 159, 0); } 100% { transform: scale(1); box-shadow: 0 6px 0px #D8899D, 0 0 0 0 rgba(242, 140, 159, 0); } }
 
-        .final-action.show {
-            display: block;
-        }
+        /* Formulario */
+        textarea { width: 100%; height: 120px; border: 3px solid var(--pastel-pink); border-radius: 20px; padding: 1rem; font-family: var(--font-ui); font-size: 1.1rem; color: var(--text-dark); resize: none; outline: none; transition: border-color 0.3s; margin-bottom: 1rem; }
+        textarea:focus { border-color: var(--text-pink); }
+        .success-message { display: none; font-family: var(--font-hand); font-size: 2.2rem; color: var(--text-pink); animation: pop-in 0.5s ease; }
 
-        .final-text-viena {
-            font-family: var(--font-hand);
-            font-size: 2.2rem;
-            color: var(--text-pink);
-            line-height: 1.1;
-            margin-bottom: 0.2rem;
-        }
-
-        .final-author {
-            font-family: var(--font-hand);
-            font-size: 1.8rem;
-            color: var(--deep-pink);
-            margin-bottom: 1.5rem;
-        }
-
-        .btn-pulse {
-            background: linear-gradient(135deg, var(--text-pink), #FF6B8B);
-            color: white;
-            font-size: 1.2rem;
-            padding: 1rem 1.5rem;
-            animation: pulse 2s infinite;
-            box-shadow: 0 6px 0px #D8899D;
-            width: 100%;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 6px 0px #D8899D, 0 0 0 0 rgba(242, 140, 159, 0.7); }
-            50% { transform: scale(1.05); box-shadow: 0 6px 0px #D8899D, 0 0 0 15px rgba(242, 140, 159, 0); }
-            100% { transform: scale(1); box-shadow: 0 6px 0px #D8899D, 0 0 0 0 rgba(242, 140, 159, 0); }
-        }
-
-        .form-title {
-            font-size: 1.4rem;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        textarea {
-            width: 100%;
-            height: 120px;
-            border: 3px solid var(--pastel-pink);
-            border-radius: 20px;
-            padding: 1rem;
-            font-family: var(--font-ui);
-            font-size: 1.1rem;
-            color: var(--text-dark);
-            resize: none;
-            outline: none;
-            transition: border-color 0.3s;
-            margin-bottom: 1rem;
-            background-color: #FAFAFA;
-        }
-
-        textarea:focus {
-            border-color: var(--text-pink);
-            background-color: var(--white);
-        }
-
-        .success-message {
-            display: none;
-            font-family: var(--font-hand);
-            font-size: 2.2rem;
-            color: var(--text-pink);
-            animation: pop-in 0.5s ease;
-        }
-
+        /* --- Optimizaciones para Móviles --- */
         @media (max-width: 480px) {
-            .app-container { padding: 2rem 1.5rem; min-height: 480px; }
+            .app-container { padding: 2rem 1.5rem; border-width: 4px; }
+            h1 { font-size: 2.5rem; }
             .pony-wrapper { width: 180px; height: 180px; }
-            .btn-group { flex-direction: column; align-items: center; }
-            button { width: 100%; max-width: 280px; }
-            .cards-grid { gap: 1rem; }
-            .modal-content { padding: 2rem 1.5rem; }
-            .mini-pony { width: 100px; height: 100px; margin-top: -50px; }
-            .final-text-viena { font-size: 1.8rem; }
+            button { width: 100%; padding: 0.8rem 1rem; }
+            .modal-content { padding: 2rem 1.5rem; width: 95vw; height: 85vh; max-height: 85vh; border-width: 4px; }
+            .modal-heading { font-size: 2.5rem; }
+            .theme-plath-content .modal-heading { font-size: 2.2rem; }
+            .modal-body { font-size: 1.1rem; }
+            .modal-poem { font-size: 1.6rem; padding: 1rem; }
+            .plath-polaroid img { width: 160px; height: 160px; }
+            .plath-poem-book { font-size: 1.1rem; padding: 1.5rem 1.5rem 1.5rem 1rem; border-left-width: 12px; }
+            .pet-grid { gap: 1rem; }
+            .pet-caption { font-size: 1.2rem; }
+            .track-title { font-size: 1rem; }
+            .final-text-viena { font-size: 2.2rem; }
+            .final-author { font-size: 1.6rem; }
+            .sketchfab-container iframe { height: 220px; }
         }
     </style>
 </head>
 <body>
-
-    <div class="bg-flowers" id="bg-layer">
-        <!-- Flowers injected by JS -->
-    </div>
+    <div class="bg-flowers" id="bg-layer"></div>
 
     <main class="app-container">
-        
-        <!-- Screen 1: Intro -->
+        <!-- Pantalla 1 -->
         <section class="screen active" id="screen-1">
             <div class="pony-wrapper">
-                <!-- Advanced Custom Fluttershy SVG with Wing Animation -->
                 <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#FFF59D" />
-                            <stop offset="100%" stop-color="#FBC02D" />
+                            <stop offset="0%" stop-color="#FFF59D" /><stop offset="100%" stop-color="#FBC02D" />
                         </linearGradient>
                         <linearGradient id="maneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#F8BBD0" />
-                            <stop offset="100%" stop-color="#F06292" />
+                            <stop offset="0%" stop-color="#F8BBD0" /><stop offset="100%" stop-color="#F06292" />
                         </linearGradient>
                     </defs>
-                    
-                    <!-- Back Wing (Static for depth) -->
                     <path d="M110 80 Q140 60 135 90 Q150 75 145 95 Q160 85 150 105 Q130 110 110 90" fill="#FFF59D" opacity="0.7"/>
-
-                    <!-- Tail -->
                     <path d="M140 120 C180 110 190 160 170 180 C150 160 140 160 130 140 Z" fill="url(#maneGrad)"/>
                     <path d="M145 125 C185 120 195 170 175 190 C160 170 150 165 140 150 Z" fill="#F48FB1" opacity="0.6"/>
-
-                    <!-- Back Legs -->
                     <path d="M115 130 L110 175 C110 180 125 180 125 175 L130 135" fill="#FFF176"/>
                     <path d="M85 135 L80 175 C80 180 95 180 95 175 L100 140" fill="#FFF176"/>
-
-                    <!-- Body -->
                     <path d="M70 90 C90 70 130 90 145 120 C150 130 140 150 120 150 L85 150 C60 150 50 130 50 110 Z" fill="url(#bodyGrad)"/>
-                    
-                    <!-- Front Legs -->
                     <path d="M125 135 L125 180 C125 185 140 185 140 180 L140 135" fill="url(#bodyGrad)"/>
                     <path d="M95 140 L95 180 C95 185 110 185 110 180 L110 140" fill="url(#bodyGrad)"/>
-
-                    <!-- Neck & Head -->
                     <path d="M55 110 C55 80 70 50 95 55 C110 60 115 80 100 100 Z" fill="url(#bodyGrad)"/>
                     <ellipse cx="75" cy="65" rx="30" ry="26" fill="url(#bodyGrad)"/>
-                    
-                    <!-- Snout -->
                     <ellipse cx="50" cy="75" rx="18" ry="14" fill="url(#bodyGrad)"/>
-                    <!-- Smile -->
                     <path d="M40 82 Q48 88 58 82" stroke="#E65100" stroke-width="2" fill="none" stroke-linecap="round"/>
-                    
-                    <!-- Eye (Fluttershy signature sweet eye) -->
                     <path d="M60 60 C 65 50, 80 50, 85 62" stroke="#4E342E" stroke-width="3" fill="none" stroke-linecap="round"/>
                     <path d="M85 62 L90 60 M82 66 L86 68 M78 68 L80 72" stroke="#4E342E" stroke-width="2" fill="none" stroke-linecap="round"/>
-
-                    <!-- Ear -->
                     <path d="M85 40 Q95 20 105 40 Z" fill="url(#bodyGrad)"/>
-
-                    <!-- Mane -->
                     <path d="M70 45 C70 20 95 10 110 35 C130 60 115 95 105 115 C90 135 65 125 85 90 C95 65 95 45 85 40 Z" fill="url(#maneGrad)"/>
-                    
-                    <!-- ANIMATED Front Wing -->
-                    <g class="wing">
-                        <path d="M100 105 Q125 70 135 100 Q150 85 155 110 Q170 95 160 120 Q145 135 115 120 Z" fill="#FFF9C4" stroke="#FBC02D" stroke-width="2" stroke-linejoin="round"/>
-                        <!-- Wing details -->
-                        <path d="M115 110 Q125 90 135 100 M120 115 Q135 95 145 110" stroke="#FBC02D" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                    </g>
+                    <g class="wing"><path d="M100 105 Q125 70 135 100 Q150 85 155 110 Q170 95 160 120 Q145 135 115 120 Z" fill="#FFF9C4" stroke="#FBC02D" stroke-width="2" stroke-linejoin="round"/></g>
                 </svg>
             </div>
-            <h1>Feliz Cumpleaños,<br>Preciosa</h1>
+            <h1>Feliz Dia,<br>:D</h1>
             <p class="subtitle">¿Quieres ver tu sorpresa?</p>
-            
             <div class="btn-group">
                 <button class="btn-no" id="btn-no">No gracias</button>
-                <button class="btn-yes" id="btn-yes">Sí porfavor 🌸</button>
+                <button class="btn-yes" id="btn-yes">Sí por favor 🌸</button>
             </div>
-            <!-- Div to show progressive text for "No" clicks -->
             <div class="no-msg-text" id="no-msg-text"></div>
         </section>
 
-        <!-- Screen 2: Cards & Final Action -->
+        <!-- Pantalla 2 -->
         <section class="screen" id="screen-2">
-            <h2>¡Sorpresaaa mi amoor!</h2>
-            <p class="subtitle">Haz click en cada cartita mágica ✨</p>
-
-            <div class="cards-grid" id="cards-container">
-                <!-- Cards injected by JS -->
-            </div>
-
-            <!-- Final action (appears after 4 cards) -->
+            <h2>¡Sorpresaaa, :P!</h2>
+            <p class="subtitle">Haz click en cada mariposita mágica ✨</p>
+            <div class="cards-grid" id="cards-container"></div>
+            
             <div class="final-action" id="final-action">
-                <p class="final-text-viena">Feliz flores amarillas Viena Rub** 🌼</p>
-                <p class="final-author">Daniel</p>
+                <!-- Animación hermosa de flores amarillas -->
+                <div class="flower-bouquet">
+                    <span class="flower-emoji f1">🌼</span>
+                    <span class="flower-emoji f2">🌻</span>
+                    <span class="flower-emoji f3">🌼</span>
+                </div>
+                <p class="final-text-viena">¡Felices flores amarillas,<br>Viena Rub**!</p>
+                <p class="final-author">Con cariño, Daniel</p>
+
+                <!-- Modelo 3D Girasoles -->
+                <div class="sketchfab-container">
+                    <iframe title="Girasoles" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/68a9f9d875344c6fb430c27e5db51ec5/embed?autostart=1"> </iframe>
+                </div>
+
                 <button class="btn-yes btn-pulse" id="btn-final">¿Quieres unas flores físicas? Toca aquí 💌</button>
             </div>
         </section>
-
     </main>
 
-    
-    <!-- Poem Modal -->
-    <div class="modal-overlay" id="modal-poem">
-        <div class="modal-content">
-            <div class="mini-pony">
-                <!-- Re-using the animated SVG for the modal -->
-                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:100%;">
-                    <use href="#pony-def" />
-                </svg>
+    <!-- ================= MODALES ================= -->
+
+    <!-- Modal 1: Azul (Tema de Agua con Burbujas) -->
+    <div class="modal-overlay" id="modal-azul">
+        <div class="modal-content theme-blue-content">
+            <!-- Efecto de burbujas flotantes -->
+            <div class="bubble-container">
+                <div class="bubble b1"></div>
+                <div class="bubble b2"></div>
+                <div class="bubble b3"></div>
+                <div class="bubble b4"></div>
+                <div class="bubble b5"></div>
             </div>
-            <p class="modal-poem" id="modal-text"></p>
-            <button class="btn-yes" id="btn-close-poem">Cerrar ✨</button>
+
+            <h3 class="modal-heading">El Color Azul 💙</h3>
+            <div class="modal-body">
+                <p style="margin-bottom: 1rem;">Sé que es tu color favorito. El azul es el color del cielo inmenso y del mar profundo. Representa la calma, la confianza, la inteligencia y la verdad. Es un color que abraza, que da paz cuando todo parece ir muy rápido.</p>
+                <p>Y creo que tú lo representas perfectamente. Para mí, tú eres esa calma, esa profundidad hermosa. Tienes la serenidad de una tarde despejada y la inmensidad de un océano. Por eso, no me sorprende que el azul te encante, porque al final, tú eres tan brillante y profunda como él.</p>
+            </div>
+            <p class="modal-poem">"Azul de mar cuando el sol se retira,<br>azul de cielo que guarda la calma,<br>así eres tú, cuando el mundo respira:<br>un refugio azul que le habla a mi alma."</p>
+            <button class="btn-yes btn-close-theme" style="margin-top: auto;">Volver 🌸</button>
         </div>
     </div>
 
-    <!-- Form Modal -->
-    <div class="modal-overlay" id="modal-form">
+    <!-- Modal 2: Mascotas -->
+    <div class="modal-overlay" id="modal-mascotas">
         <div class="modal-content">
-            <!-- Normal State -->
-            <div id="form-container">
-                <h3 class="form-title">Escribe qué mensaje quieres enviarme además de pedirme tus flores físicas :D</h3>
+            <h3 class="modal-heading">Lulu & Michy 🐾</h3>
+            <p class="modal-body">Me comentaste que Lulu y Michy son muy importantes para ti. Estas son las únicas dos fotitos que tenía, pero sé que el amor que les tienes no cabe en una imagen.</p>
+            
+            <div class="pet-grid">
+                <div class="pet-photo">
+                    <img src="lulu.jpeg" alt="Lulu" onerror="this.style.background='#FDECF2'; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><text y=\'50\' x=\'50\' font-size=\'40\' text-anchor=\'middle\' dominant-baseline=\'middle\'>🐶</text></svg>'">
+                    <span class="pet-caption">Lulu</span>
+                </div>
+                <div class="pet-photo">
+                    <img src="michy.jpeg" alt="Michy" onerror="this.style.background='#F3E8FF'; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><text y=\'50\' x=\'50\' font-size=\'40\' text-anchor=\'middle\' dominant-baseline=\'middle\'>🐱</text></svg>'">
+                    <span class="pet-caption">Michy</span>
+                </div>
+            </div>
+
+            <p class="modal-poem">"Dos almas pequeñas de pasos discretos,<br>que guardan en casa los dulces secretos.<br>Un ladrido de luz, un ronroneo de calma,<br>son huellas preciosas que te abrazan el alma."</p>
+            <button class="btn-yes btn-close-theme" style="margin-top: auto;">Volver 🌸</button>
+        </div>
+    </div>
+
+    <!-- Modal 3: Sylvia Plath (Tema de Libro Vintage) -->
+    <div class="modal-overlay" id="modal-plath">
+        <div class="modal-content theme-plath-content">
+            
+            <!-- Marco tipo Polaroid antigua -->
+            <div class="plath-polaroid">
+                <img src="sylvia-plath.jpg" alt="Sylvia Plath" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23F4A7B9\'/><text y=\'50\' x=\'50\' font-size=\'40\' text-anchor=\'middle\' dominant-baseline=\'middle\'>📖</text></svg>'">
+            </div>
+
+            <h3 class="modal-heading">Sylvia Plath ✨</h3>
+            <p class="modal-body">Creo que hace un tiempo vi que te gustaba Sylvia Plath. Tal vez me esté equivocando, pero igual te lo pongo aquí. Su forma de escribir es tan intensa y real, igual de fascinante que tú.</p>
+            
+            <!-- Poema en forma de Libro Abierto -->
+            <div class="plath-poem-book">
+                "Cerramos los ojos bajo un cielo encendido,<br>
+                donde el tiempo se rinde y el silencio hace ruido.<br>
+                Las estrellas nos miran con su brillo distante,<br>
+                y en el caos del mundo, tú eres mi instante.<br><br>
+                No hay miedo a la noche, ni al viento que llama,<br>
+                si el fuego que arde, desde adentro nos ama.<br>
+                Como letras que buscan su lugar en la hoja,<br>
+                mi alma en la tuya, suavemente se aloja.<br>
+                Que la vida nos rompa, que nos vuelva a armar,<br>
+                que en tus ojos profundos, yo me quiero quedar."
+            </div>
+
+            <button class="btn-yes btn-close-theme" style="margin-top: auto;">Cerrar el libro</button>
+        </div>
+    </div>
+
+    <!-- Modal 4: Canciones (Playlist) -->
+    <div class="modal-overlay" id="modal-canciones">
+        <div class="modal-content theme-spotify-content">
+            <h3 class="modal-heading">Tu Playlist 🎧</h3>
+            <p class="modal-body" style="color: var(--text-dark);">No hablamos mucho de canciones, pero he visto que algunas veces has subido de Lana del Rey y Taylor Swift, así que decidí poner estas. Perdón si me equivoco, igual con mucho cariño me las vacilé poniendo esto.</p>
+
+            <div class="spotify-list" id="spotify-list"></div>
+
+            <div class="princess-player">
+                <p id="playlist-playing-title" style="font-weight: 700; color: #1DB954; margin-bottom: 5px; font-size: 1.2rem;">Toca una canción de la lista</p>
+                <audio id="audio-playlist" src=""></audio>
+                <div class="player-controls">
+                    <button class="btn-play-pause" id="btn-playlist-play" onclick="togglePlay('audio-playlist', this)">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                    <span class="time-text current-time">0:00</span>
+                    <input type="range" class="progress-bar" value="0" max="100" oninput="seekAudio('audio-playlist', this)">
+                    <span class="time-text total-time">0:00</span>
+                </div>
+            </div>
+            <button class="btn-yes btn-close-theme" style="margin-top: auto;">Volver</button>
+        </div>
+    </div>
+
+    <!-- Modal 5: Formulario -->
+    <div class="modal-overlay" id="modal-form">
+        <div class="modal-content" style="height: auto; max-height: 90vh;">
+            <div id="form-container" style="width: 100%;">
+                <h3 class="modal-heading" style="font-size: 2.5rem;">Un último mensajito... 💌</h3>
+                <p class="modal-body" style="text-align: center;">Escribe qué mensaje quieres enviarme además de pedirme tus flores físicas :D</p>
                 <form id="flower-form">
-                    <!-- Setup FormSubmit -->
-                    <!-- This input prevents spam, standard practice for FormSubmit -->
                     <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_subject" value="🌸 ¡Petición de Flores Físicas y Mensaje de Cumpleaños! 🌸">
-                    
+                    <input type="hidden" name="_subject" value="🌸 ¡Petición de Flores Físicas y Mensaje! 🌸">
                     <textarea name="mensaje" id="mensaje" placeholder="Escribe tu mensajito mágico aquí..." required></textarea>
-                    
-                    <button type="submit" class="btn-yes" id="btn-submit" style="width: 100%;">Enviar Mensaje 💌</button>
+                    <button type="submit" class="btn-yes" id="btn-submit" style="width: 100%; font-size: 1.4rem; margin-bottom: 10px;">Enviar Mensaje 💌</button>
+                    <button type="button" class="btn-no" id="btn-close-form" style="width: 100%; font-size: 1.2rem; border: 2px solid var(--text-pink);">Mejor no ❌</button>
                 </form>
             </div>
-            
-            <!-- Success State -->
-            <div class="success-message" id="success-container">
-                ¡Mensaje enviado!<br>Yo te respondo cuando me de cuenta 💖
-                <br><br>
-                <button class="btn-yes" id="btn-close-success" style="font-size: 1rem;">Cerrar 🌼</button>
+            <div class="success-message" id="success-container" style="text-align: center;">
+                <h3 class="modal-heading">¡Mensaje enviado! ✨</h3>
+                <p class="modal-body" style="text-align: center;">Yo te respondo cuando me dé cuenta 💖</p>
+                <br>
+                <button class="btn-yes btn-close-theme" id="btn-close-success" style="font-size: 1.2rem;">Cerrar 🌼</button>
             </div>
         </div>
     </div>
-
-    <!-- Hidden definition of the Pony to reuse in the modal cleanly -->
-    <svg style="display: none;">
-        <defs>
-            <g id="pony-def">
-                <!-- Winged pony definition identical to main screen -->
-                 <path d="M110 80 Q140 60 135 90 Q150 75 145 95 Q160 85 150 105 Q130 110 110 90" fill="#FFF59D" opacity="0.7"/>
-                 <path d="M140 120 C180 110 190 160 170 180 C150 160 140 160 130 140 Z" fill="#F8BBD0"/>
-                 <path d="M115 130 L110 175 C110 180 125 180 125 175 L130 135" fill="#FFF176"/>
-                 <path d="M85 135 L80 175 C80 180 95 180 95 175 L100 140" fill="#FFF176"/>
-                 <path d="M70 90 C90 70 130 90 145 120 C150 130 140 150 120 150 L85 150 C60 150 50 130 50 110 Z" fill="#FFF59D"/>
-                 <path d="M125 135 L125 180 C125 185 140 185 140 180 L140 135" fill="#FFF59D"/>
-                 <path d="M95 140 L95 180 C95 185 110 185 110 180 L110 140" fill="#FFF59D"/>
-                 <path d="M55 110 C55 80 70 50 95 55 C110 60 115 80 100 100 Z" fill="#FFF59D"/>
-                 <ellipse cx="75" cy="65" rx="30" ry="26" fill="#FFF59D"/>
-                 <ellipse cx="50" cy="75" rx="18" ry="14" fill="#FFF59D"/>
-                 <path d="M40 82 Q48 88 58 82" stroke="#E65100" stroke-width="2" fill="none" stroke-linecap="round"/>
-                 <path d="M60 60 C 65 50, 80 50, 85 62" stroke="#4E342E" stroke-width="3" fill="none" stroke-linecap="round"/>
-                 <path d="M85 62 L90 60 M82 66 L86 68 M78 68 L80 72" stroke="#4E342E" stroke-width="2" fill="none" stroke-linecap="round"/>
-                 <path d="M85 40 Q95 20 105 40 Z" fill="#FFF59D"/>
-                 <path d="M70 45 C70 20 95 10 110 35 C130 60 115 95 105 115 C90 135 65 125 85 90 C95 65 95 45 85 40 Z" fill="#F8BBD0"/>
-                 <g class="wing">
-                     <path d="M100 105 Q125 70 135 100 Q150 85 155 110 Q170 95 160 120 Q145 135 115 120 Z" fill="#FFF9C4" stroke="#FBC02D" stroke-width="2" stroke-linejoin="round"/>
-                 </g>
-            </g>
-        </defs>
-    </svg>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            
-            // 1. Generate Floating Background Flowers
+            // Fondo animado
             const bgLayer = document.getElementById('bg-layer');
-            const flowerSVG = `
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <g fill="#FDF181" stroke="#FBC02D" stroke-width="2">
-                        <circle cx="50" cy="20" r="15"/>
-                        <circle cx="50" cy="80" r="15"/>
-                        <circle cx="20" cy="50" r="15"/>
-                        <circle cx="80" cy="50" r="15"/>
-                    </g>
-                    <circle cx="50" cy="50" r="12" fill="#F4A7B9"/>
-                </svg>
-            `;
-
+            const flowerSVG = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g fill="#FDF181" stroke="#FBC02D" stroke-width="2"><circle cx="50" cy="20" r="15"/><circle cx="50" cy="80" r="15"/><circle cx="20" cy="50" r="15"/><circle cx="80" cy="50" r="15"/></g><circle cx="50" cy="50" r="12" fill="#F4A7B9"/></svg>`;
             for (let i = 0; i < 12; i++) {
-                const f = document.createElement('div');
-                f.className = 'floating-flower';
-                f.innerHTML = flowerSVG;
-                f.style.width = `${30 + Math.random() * 30}px`;
-                f.style.height = f.style.width;
-                f.style.left = `${Math.random() * 100}vw`;
-                f.style.top = `${Math.random() * 100}vh`;
-                f.style.animationDelay = `${Math.random() * 5}s`;
-                f.style.animationDuration = `${7 + Math.random() * 5}s`;
+                const f = document.createElement('div'); f.className = 'floating-flower'; f.innerHTML = flowerSVG;
+                f.style.width = `${30 + Math.random() * 30}px`; f.style.height = f.style.width;
+                f.style.left = `${Math.random() * 100}vw`; f.style.top = `${Math.random() * 100}vh`;
+                f.style.animationDelay = `${Math.random() * 5}s`; f.style.animationDuration = `${7 + Math.random() * 5}s`;
                 bgLayer.appendChild(f);
             }
 
-            // 2. Screen 1 Logic (Progressive "No" button)
-            const btnNo = document.getElementById('btn-no');
-            const btnYes = document.getElementById('btn-yes');
-            const screen1 = document.getElementById('screen-1');
-            const screen2 = document.getElementById('screen-2');
+            // Inicio
+            const btnNo = document.getElementById('btn-no'), btnYes = document.getElementById('btn-yes');
+            const screen1 = document.getElementById('screen-1'), screen2 = document.getElementById('screen-2');
             const noMsgText = document.getElementById('no-msg-text');
-            
-            const noTaps = [
-                "¿Seguuura? 🥺",
-                "Piénsalo bien... 🌼",
-                "Va a valer la pena, lo prometo 💛",
-                "Última oportunidad para decir que sí 😌"
-            ];
+            const noTaps = ["¿Seguuura? 🥺", "Piénsalo bien... 🌼", "Va a valer la pena, lo prometo 💛", "Última oportunidad 😌"];
             let noCount = 0;
 
             btnNo.addEventListener('click', () => {
-                noMsgText.textContent = noTaps[Math.min(noCount, noTaps.length - 1)];
-                noCount++;
-                
-                // Scale down the button based on clicks
-                const newScale = 1 - Math.min(noCount, 4) * 0.15;
-                btnNo.style.transform = `scale(${newScale})`;
-                
-                // Disable button after array ends
-                if(noCount >= noTaps.length){
-                    btnNo.style.opacity = '0.4';
-                    btnNo.disabled = true;
-                    btnNo.style.pointerEvents = 'none';
-                }
+                noMsgText.textContent = noTaps[Math.min(noCount, noTaps.length - 1)]; noCount++;
+                btnNo.style.transform = `scale(${1 - Math.min(noCount, 4) * 0.15})`;
+                if (noCount >= noTaps.length) { btnNo.style.opacity = '0.4'; btnNo.disabled = true; btnNo.style.pointerEvents = 'none'; }
             });
+            btnYes.addEventListener('click', () => { screen1.classList.remove('active'); setTimeout(() => screen2.classList.add('active'), 500); });
 
-            btnYes.addEventListener('click', () => {
-                screen1.classList.remove('active');
-                setTimeout(() => {
-                    screen2.classList.add('active');
-                }, 500);
-            });
-
-            // 3. Screen 2 Logic (Cards & Poems)
+            // Mariposas
             const cardsContainer = document.getElementById('cards-container');
-            const modalPoem = document.getElementById('modal-poem');
-            const modalText = document.getElementById('modal-text');
-            const btnClosePoem = document.getElementById('btn-close-poem');
-            const finalAction = document.getElementById('final-action');
-            
-            const poems = [
-                "Como el girasol que sigue al sol,\nmi corazón te sigue a ti veloz.\nAmarillo brillante, alegre color,\nasí es la luz que tú me das, mi amor.",
-                "Entre pétalos dorados escribo tu nombre,\nno hay jardín que de ti no se asombre.\nEres mi sorpresa, mi risa, mi calma,\nla flor más bonita que crece en mi alma.",
-                "Si las flores amarillas hablaran de ti,\ndirían que eres dulce, sincera y feliz.\nQue iluminas cualquier día nublado,\ncomo el sol entre pétalos dorado.",
-                "Guardé estas flores solo para ti,\namarillas, brillantes, como tu sonreír.\nHoy te regalo este pequeño jardín,\npara decirte: feliz cumpleaños, mi todo y mi fin."
-            ];
-
             const openedCards = new Set();
+            const cardData = [ { id: 'modal-azul', themeClass: 'theme-azul' }, { id: 'modal-mascotas', themeClass: 'theme-mascotas' }, { id: 'modal-plath', themeClass: 'theme-plath' }, { id: 'modal-canciones', themeClass: 'theme-canciones' } ];
+            const butterflySVG = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M50 50 C20 10 10 40 40 50 Z" fill="#F4A7B9"/><path d="M50 50 C80 10 90 40 60 50 Z" fill="#FDECF2"/><path d="M50 50 C20 90 10 60 40 50 Z" fill="#FDECF2"/><path d="M50 50 C80 90 90 60 60 50 Z" fill="#F4A7B9"/><ellipse cx="50" cy="50" rx="3" ry="18" fill="#7A5B62" /></svg>`;
 
-            // Butterfly inside card SVG
-            const butterflySVG = `
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M50 50 C20 10 10 40 40 50 Z" fill="#A7C7F4" opacity="0.9"/>
-                    <path d="M50 50 C80 10 90 40 60 50 Z" fill="#F4A7B9" opacity="0.9"/>
-                    <path d="M50 50 C20 90 10 60 40 50 Z" fill="#F4A7B9" opacity="0.9"/>
-                    <path d="M50 50 C80 90 90 60 60 50 Z" fill="#A7C7F4" opacity="0.9"/>
-                    <ellipse cx="50" cy="50" rx="3" ry="18" fill="#7A5B62" />
-                </svg>
-            `;
-
-            poems.forEach((poem, index) => {
-                const card = document.createElement('div');
-                card.className = 'surprise-card';
-                card.innerHTML = butterflySVG;
-                
+            cardData.forEach((data, index) => {
+                const card = document.createElement('div'); card.className = `surprise-card ${data.themeClass}`; card.innerHTML = butterflySVG;
                 card.addEventListener('click', () => {
                     if (!card.classList.contains('opened')) {
-                        modalText.innerText = poem;
-                        modalPoem.classList.add('show');
-                        card.classList.add('opened');
-                        openedCards.add(index);
+                        document.getElementById(data.id).classList.add('show'); card.classList.add('opened'); openedCards.add(index);
                     }
                 });
-                
                 cardsContainer.appendChild(card);
             });
 
-            btnClosePoem.addEventListener('click', () => {
-                modalPoem.classList.remove('show');
-                
-                // Show final button and exact text if all 4 are open
-                if (openedCards.size === poems.length) {
-                    setTimeout(() => {
-                        finalAction.classList.add('show');
-                    }, 500);
-                }
-            });
-
-            // 4. Final Form Logic (AJAX Email Sending)
-            const btnFinal = document.getElementById('btn-final');
-            const modalForm = document.getElementById('modal-form');
-            const flowerForm = document.getElementById('flower-form');
-            const btnSubmit = document.getElementById('btn-submit');
-            const formContainer = document.getElementById('form-container');
-            const successContainer = document.getElementById('success-container');
-            const btnCloseSuccess = document.getElementById('btn-close-success');
-
-            btnFinal.addEventListener('click', () => {
-                modalForm.classList.add('show');
-            });
-
-            flowerForm.addEventListener('submit', function(e) {
-                e.preventDefault(); // Prevent page reload
-                
-                const originalText = btnSubmit.innerHTML;
-                btnSubmit.innerHTML = 'Enviando mágicamente... ✨';
-                btnSubmit.disabled = true;
-
-                const formData = new FormData(this);
-
-                // Target email via FormSubmit AJAX API
-                fetch('https://formsubmit.co/ajax/daniromema@gmail.com', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if(data.success) {
-                        // Hide form, show success
-                        formContainer.style.display = 'none';
-                        successContainer.style.display = 'block';
-                    } else {
-                        throw new Error('Error en el envío');
+            document.querySelectorAll('.btn-close-theme').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    btn.closest('.modal-overlay').classList.remove('show');
+                    const mainAudio = document.getElementById('audio-playlist');
+                    if (mainAudio) { mainAudio.pause(); const playBtn = document.getElementById('btn-playlist-play'); if (playBtn) playBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'; }
+                    if (openedCards.size === cardData.length && btn.id !== 'btn-close-success') {
+                        setTimeout(() => document.getElementById('final-action').classList.add('show'), 500);
                     }
-                })
-                .catch(error => {
-                    alert('Oops! Hubo un error mágico. Intenta de nuevo.');
-                    btnSubmit.innerHTML = originalText;
-                    btnSubmit.disabled = false;
                 });
             });
 
-            btnCloseSuccess.addEventListener('click', () => {
-                modalForm.classList.remove('show');
+            // Playlist interactiva
+            const playlist = [
+                { title: 'Venice Bitch', artist: 'Lana Del Rey', src: 'Venice.mp3' },
+                { title: 'Lover', artist: 'Taylor Swift', src: 'Lover.mp3' },
+                { title: 'Summertime Sadness', artist: 'Lana Del Rey', src: 'Sadness.mp3' },
+                { title: 'Cardigan', artist: 'Taylor Swift', src: 'Cardigan.mp3' },
+                { title: 'Video Games', artist: 'Lana Del Rey', src: 'Videogames.mp3' }
+            ];
+
+            const spotifyList = document.getElementById('spotify-list'), mainAudio = document.getElementById('audio-playlist');
+            const playlistTitle = document.getElementById('playlist-playing-title'), mainPlayBtn = document.getElementById('btn-playlist-play');
+
+            playlist.forEach((track, i) => {
+                const row = document.createElement('div'); row.className = 'track-row';
+                row.innerHTML = `<div class="track-number">${i + 1}</div><div class="track-info"><span class="track-title">${track.title}</span><span class="track-artist">${track.artist}</span></div><div class="eq-bars"><span></span><span></span><span></span></div>`;
+                row.addEventListener('click', () => {
+                    document.querySelectorAll('.track-row').forEach(r => r.classList.remove('playing')); row.classList.add('playing');
+                    mainAudio.src = track.src; playlistTitle.textContent = track.title + " - " + track.artist; mainAudio.play();
+                    mainPlayBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
+                });
+                spotifyList.appendChild(row);
             });
 
+            if (mainAudio) {
+                const playerUI = mainAudio.nextElementSibling;
+                const progress = playerUI.querySelector('.progress-bar'), currTimeEl = playerUI.querySelector('.current-time'), totalTimeEl = playerUI.querySelector('.total-time');
+                mainAudio.addEventListener('loadedmetadata', () => { totalTimeEl.textContent = formatTime(mainAudio.duration); });
+                mainAudio.addEventListener('timeupdate', () => {
+                    if (!mainAudio.duration) return;
+                    progress.value = (mainAudio.currentTime / mainAudio.duration) * 100;
+                    currTimeEl.textContent = formatTime(mainAudio.currentTime);
+                });
+                mainAudio.addEventListener('ended', () => {
+                    mainPlayBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'; progress.value = 0; currTimeEl.textContent = "0:00";
+                    document.querySelectorAll('.track-row').forEach(r => r.classList.remove('playing'));
+                });
+            }
+
+            // Formularios
+            document.getElementById('btn-final').addEventListener('click', () => { document.getElementById('modal-form').classList.add('show'); });
+            document.getElementById('btn-close-form').addEventListener('click', () => { document.getElementById('modal-form').classList.remove('show'); });
+            document.getElementById('flower-form').addEventListener('submit', function(e) {
+                e.preventDefault(); const btnSubmit = document.getElementById('btn-submit'), originalText = btnSubmit.innerHTML;
+                btnSubmit.innerHTML = 'Enviando mágicamente... ✨'; btnSubmit.disabled = true;
+                fetch('https://formsubmit.co/ajax/daniromema@gmail.com', { method: 'POST', body: new FormData(this) })
+                .then(response => response.json()).then(data => {
+                    if(data.success) { document.getElementById('form-container').style.display = 'none'; document.getElementById('success-container').style.display = 'block'; } else throw new Error('Error');
+                }).catch(() => { alert('Oops! Hubo un error mágico. Intenta de nuevo.'); btnSubmit.innerHTML = originalText; btnSubmit.disabled = false; });
+            });
         });
+
+        function togglePlay(audioId, btnElement) {
+            const audio = document.getElementById(audioId); if(!audio) return;
+            if (!audio.paused) { audio.pause(); btnElement.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'; } 
+            else { 
+                if(!audio.src || audio.src.endsWith(location.pathname)) { alert("Por favor, selecciona una canción de la lista primero."); return; }
+                audio.play(); btnElement.innerHTML = '<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>'; 
+            }
+        }
+        function seekAudio(audioId, inputElement) { const audio = document.getElementById(audioId); if(audio && audio.duration) audio.currentTime = audio.duration * (inputElement.value / 100); }
+        function formatTime(seconds) { if(isNaN(seconds)) return "0:00"; const m = Math.floor(seconds / 60), s = Math.floor(seconds % 60); return `${m}:${s < 10 ? '0' : ''}${s}`; }
     </script>
 </body>
 </html>
